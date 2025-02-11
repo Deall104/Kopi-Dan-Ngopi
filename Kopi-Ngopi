@@ -1,0 +1,55 @@
+kopi-dan-ngopi/
+│── index.html
+│── style.css
+│── script.js
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kopi dan Ngopi Testnet</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Selamat Datang di Kopi dan Ngopi Testnet</h1>
+        <p>Platform eksplorasi testnet blockchain.</p>
+    </header>
+    <main>
+        <button id="connectWallet">Hubungkan Wallet</button>
+        <p id="walletAddress"></p>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+document.getElementById("connectWallet").addEventListener("click", async () => {
+    if (window.ethereum) {
+        try {
+            const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+            document.getElementById("walletAddress").innerText = `Wallet: ${accounts[0]}`;
+        } catch (error) {
+            console.error("Gagal menghubungkan wallet", error);
+        }
+    } else {
+        alert("MetaMask tidak terdeteksi!");
+    }
+});
